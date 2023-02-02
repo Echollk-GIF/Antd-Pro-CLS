@@ -5,7 +5,7 @@ import type { RunTimeLayoutConfig } from 'umi';
 import { history, Link } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
-import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
+import { currentUserInfo as queryCurrentUser } from './services/ant-design-pro/user';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
 import { type RequestConfig } from 'umi';
@@ -107,6 +107,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
   };
 };
 
+//携带token请求拦截器
 const authHeaderInterceptor = (url: string, options: RequestConfig) => {
   const authHeader = { Authorization: `Bearer ${localStorage.getItem('token')}` };
   return {
@@ -114,6 +115,7 @@ const authHeaderInterceptor = (url: string, options: RequestConfig) => {
     options: { ...options, interceptors: true, headers: authHeader },
   };
 };
+//配置请求拦截器
 export const request: RequestConfig = {
   // 新增自动添加AccessToken的请求前拦截器
   requestInterceptors: [authHeaderInterceptor],
