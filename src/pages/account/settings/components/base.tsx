@@ -9,7 +9,7 @@ import ProForm, {
   ProFormTextArea,
 } from '@ant-design/pro-form';
 import { useRequest } from 'umi';
-import { queryCurrent } from '../service';
+import { currentUserInfo } from '@/services/ant-design-pro/user';
 import { queryProvince, queryCity } from '../service';
 
 import styles from './BaseView.less';
@@ -43,7 +43,7 @@ const AvatarView = ({ avatar }: { avatar: string }) => (
 
 const BaseView: React.FC = () => {
   const { data: currentUser, loading } = useRequest(() => {
-    return queryCurrent();
+    return currentUserInfo();
   });
 
   const getAvatarURL = () => {
@@ -76,7 +76,7 @@ const BaseView: React.FC = () => {
               }}
               initialValues={{
                 ...currentUser,
-                phone: currentUser?.phone.split('-'),
+                phone: currentUser?.phone?.split('-'),
               }}
               hideRequiredMark
             >
