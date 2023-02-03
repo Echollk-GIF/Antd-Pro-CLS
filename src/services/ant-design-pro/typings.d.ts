@@ -2,6 +2,11 @@
 /* eslint-disable */
 
 declare namespace API {
+  type GeographicItemType = {
+    name: string;
+    id: string;
+  };
+
   type CurrentUser = {
     name?: string;
     avatar?: string;

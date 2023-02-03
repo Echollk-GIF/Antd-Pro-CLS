@@ -10,7 +10,7 @@ import ProForm, {
 } from '@ant-design/pro-form';
 import { useRequest } from 'umi';
 import { currentUserInfo } from '@/services/ant-design-pro/user';
-import { queryProvince, queryCity } from '../service';
+import { queryProvince, queryCity } from '@/services/ant-design-pro/global';
 
 import styles from './BaseView.less';
 
