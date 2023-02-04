@@ -8,8 +8,8 @@ import ProForm, {
   ProFormText,
   ProFormTextArea,
 } from '@ant-design/pro-form';
-import { useRequest } from 'umi';
-import { currentUserInfo } from '@/services/ant-design-pro/user';
+import { useRequest, useModel } from 'umi';
+import { currentUserInfoById } from '@/services/ant-design-pro/user';
 import { queryProvince, queryCity } from '@/services/ant-design-pro/global';
 
 import styles from './BaseView.less';
@@ -42,14 +42,16 @@ const AvatarView = ({ avatar }: { avatar: string }) => (
 );
 
 const BaseView: React.FC = () => {
-  const { data: currentUser, loading } = useRequest(() => {
-    return currentUserInfo();
+  const { initialState } = useModel('@@initialState');
+  const { currentUser } = initialState || {};
+  const { data: currentUserInfo, loading } = useRequest(() => {
+    return currentUserInfoById({ id: currentUser?.id });
   });
 
   const getAvatarURL = () => {
-    if (currentUser) {
-      if (currentUser.avatar) {
-        return currentUser.avatar;
+    if (currentUserInfo) {
+      if (currentUserInfo.avatar) {
+        return currentUserInfo.avatar;
       }
       const url = 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
       return url;
@@ -75,8 +77,8 @@ const BaseView: React.FC = () => {
                 render: (_, dom) => dom[1],
               }}
               initialValues={{
-                ...currentUser,
-                phone: currentUser?.phone?.split('-'),
+                ...currentUserInfo,
+                phone: currentUserInfo?.phone?.split('-'),
               }}
               hideRequiredMark
             >

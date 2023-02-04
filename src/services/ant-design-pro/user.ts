@@ -21,12 +21,22 @@ export async function outLogin(body: API.outLogin, options?: { [key: string]: an
     ...(options || {}),
   });
 }
-/** 根据token获取用户信息接口 GET /api/user/currentUserInfo */
-export async function currentUserInfo(options?: { [key: string]: any }) {
+/** 根据token获取用户信息接口 GET /api/user/currentUserInfoByToken */
+export async function currentUserInfoByToken(options?: { [key: string]: any }) {
   return request<{
     data: API.CurrentUser;
-  }>('/api/user/currentUserInfo', {
+  }>('/api/user/currentUserInfoByToken', {
     method: 'GET',
+    ...(options || {}),
+  });
+}
+/** 根据id获取用户信息接口 GET /api/user/currentUserInfoById */
+export async function currentUserInfoById(body: API.userId, options?: { [key: string]: any }) {
+  return request<{
+    data: API.CurrentUser;
+  }>('/api/user/currentUserInfoById', {
+    method: 'POST',
+    data: body,
     ...(options || {}),
   });
 }

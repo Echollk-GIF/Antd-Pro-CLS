@@ -327,7 +327,7 @@ export default defineConfig({
     // },
     {
       path: '/',
-      redirect: '/account/center',
+      redirect: '/account/settings',
     },
     {
       component: '404',

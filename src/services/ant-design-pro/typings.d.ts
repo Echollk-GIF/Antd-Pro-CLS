@@ -74,6 +74,10 @@ declare namespace API {
     type?: string;
   };
 
+  type userId = {
+    id?: number;
+  };
+
   type outLogin = {
     id?: number;
   };
