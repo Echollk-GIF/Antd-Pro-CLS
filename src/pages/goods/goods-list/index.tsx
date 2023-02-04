@@ -9,7 +9,8 @@ import type { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import type { FormValueType } from './components/UpdateForm';
 import UpdateForm from './components/UpdateForm';
-import { rule, addRule, updateRule, removeRule } from './service';
+import { addRule, updateRule, removeRule } from './service';
+import { getGoodsList } from '@/services/ant-design-pro/goods';
 import type { TableListItem, TableListPagination } from './data';
 /**
  * 添加节点
@@ -92,9 +93,13 @@ const TableList: React.FC = () => {
 
   const columns: ProColumns<TableListItem>[] = [
     {
-      title: '规则名称',
+      title: '物品ID',
+      dataIndex: 'id',
+    },
+    {
+      title: '物品名称',
       dataIndex: 'name',
-      tip: '规则名称是唯一的 key',
+      tip: '物品名称是唯一的 key',
       render: (dom, entity) => {
         return (
           <a
@@ -114,11 +119,11 @@ const TableList: React.FC = () => {
       valueType: 'textarea',
     },
     {
-      title: '服务调用次数',
+      title: '物品调用次数',
       dataIndex: 'callNo',
       sorter: true,
       hideInForm: true,
-      renderText: (val: string) => `${val}万`,
+      renderText: (val: string) => `${val}个`,
     },
     {
       title: '状态',
@@ -126,15 +131,15 @@ const TableList: React.FC = () => {
       hideInForm: true,
       valueEnum: {
         0: {
-          text: '关闭',
+          text: '无货',
           status: 'Default',
         },
         1: {
-          text: '运行中',
+          text: '补货中',
           status: 'Processing',
         },
         2: {
-          text: '已上线',
+          text: '有货',
           status: 'Success',
         },
         3: {
@@ -176,9 +181,6 @@ const TableList: React.FC = () => {
         >
           配置
         </a>,
-        <a key="subscribeAlert" href="https://procomponents.ant.design/">
-          订阅警报
-        </a>,
       ],
     },
   ];
@@ -203,7 +205,7 @@ const TableList: React.FC = () => {
             <PlusOutlined /> 新建
           </Button>,
         ]}
-        request={rule}
+        request={getGoodsList}
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {

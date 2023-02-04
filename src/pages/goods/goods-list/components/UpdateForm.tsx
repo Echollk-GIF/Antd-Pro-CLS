@@ -39,7 +39,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
               padding: '32px 40px 48px',
             }}
             destroyOnClose
-            title="规则配置"
+            title="更新物品"
             visible={props.updateModalVisible}
             footer={submitter}
             onCancel={() => {
