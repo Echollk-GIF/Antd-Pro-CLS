@@ -13,12 +13,13 @@ export async function currentUser(options?: { [key: string]: any }) {
 }
 
 /** 退出登录接口 POST /api/login/outLogin */
-export async function outLogin(options?: { [key: string]: any }) {
-  return request<Record<string, any>>('/api/login/outLogin', {
-    method: 'POST',
-    ...(options || {}),
-  });
-}
+// export async function outLogin(body: API.outLogin, options?: { [key: string]: any }) {
+//   return request<Record<string, any>>('/api/login/outLogin', {
+//     method: 'POST',
+//     data: body,
+//     ...(options || {}),
+//   });
+// }
 
 /** 登录接口 POST /api/login/account */
 // export async function login(body: API.LoginParams, options?: { [key: string]: any }) {

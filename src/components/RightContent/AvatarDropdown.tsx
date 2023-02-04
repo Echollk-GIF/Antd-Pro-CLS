@@ -5,7 +5,8 @@ import { history, useModel } from 'umi';
 import { stringify } from 'querystring';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
-import { outLogin } from '@/services/ant-design-pro/api';
+import { outLogin } from '@/services/ant-design-pro/user';
+
 import type { MenuInfo } from 'rc-menu/lib/interface';
 
 export type GlobalHeaderRightProps = {
@@ -15,8 +16,8 @@ export type GlobalHeaderRightProps = {
 /**
  * 退出登录，并且将当前的 url 保存
  */
-const loginOut = async () => {
-  await outLogin();
+const loginOut = async (id: number) => {
+  await outLogin({ id });
   const { query = {}, search, pathname } = history.location;
   const { redirect } = query;
   // Note: There may be security issues, please note
@@ -38,11 +39,12 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
       const { key } = event;
       if (key === 'logout') {
         setInitialState((s) => ({ ...s, currentUser: undefined }));
-        loginOut();
+        loginOut(initialState?.currentUser?.id || 0);
         return;
       }
       history.push(`/account/${key}`);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [setInitialState],
   );
 

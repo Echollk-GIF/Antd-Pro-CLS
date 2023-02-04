@@ -13,6 +13,14 @@ export async function loginAccount(body: API.LoginParams, options?: { [key: stri
     ...(options || {}),
   });
 }
+/** 退出登录接口 POST /api/login/outLogin */
+export async function outLogin(body: API.outLogin, options?: { [key: string]: any }) {
+  return request<Record<string, any>>('/api/user/outLogin', {
+    method: 'POST',
+    data: body,
+    ...(options || {}),
+  });
+}
 /** 根据token获取用户信息接口 GET /api/user/currentUserInfo */
 export async function currentUserInfo(options?: { [key: string]: any }) {
   return request<{

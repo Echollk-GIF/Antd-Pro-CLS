@@ -10,7 +10,7 @@ declare namespace API {
   type CurrentUser = {
     name?: string;
     avatar?: string;
-    userid?: string;
+    id?: number;
     email?: string;
     signature?: string;
     title?: string;
@@ -72,6 +72,10 @@ declare namespace API {
     password?: string;
     autoLogin?: boolean;
     type?: string;
+  };
+
+  type outLogin = {
+    id?: number;
   };
 
   type ErrorResponse = {
