@@ -40,6 +40,8 @@ export default {
   'menu.exception.not-find': '404',
   'menu.exception.server-error': '500',
   'menu.exception.trigger': '触发错误',
+  'menu.goods': '物品页',
+  'menu.goods.goods-list': '物品列表',
   'menu.account': '个人页',
   'menu.account.center': '个人中心',
   'menu.account.settings': '个人设置',
